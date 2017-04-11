@@ -4,6 +4,8 @@ class EncountersController < ApplicationController
   # GET /encounters
   # GET /encounters.json
   def index
+    @heading = "Encounters"
+    @subheading = "Designer"
     @encounters = Encounter.all
   end
 

@@ -156,11 +156,13 @@ function calculateAdjustedXp() {
 }
 
 function getDifficultyRating(xp_threshold, adjusted_xp) {
-  if (adjusted_xp <= xp_threshold['Easy'])
+  if (adjusted_xp < xp_threshold['Easy'])
+    return 'Trivial';
+  else if (adjusted_xp < xp_threshold['Medium']) {
     return 'Easy';
-  else if (adjusted_xp <= xp_threshold['Medium']) {
+  } else if (adjusted_xp < xp_threshold['Hard']) {
     return 'Medium';
-  } else if (adjusted_xp <= xp_threshold['Hard']) {
+  } else if (adjusted_xp < xp_threshold['Deadly']) {
     return 'Hard';
   }
 
@@ -224,8 +226,29 @@ function displayPlayers() {
     container.append('<li id="id' + player + '" name="name' + player + '">Level ' + player + '</li>');
   }
 
+  var difficulty = getDifficultyRating(xp_threshold, adjusted_xp);
+  var current_xp = 0;
+  for (var i = 0; i < selected_monsters.length; i++) {
+    var monster = selected_monsters[i];
+    current_xp += monsters_xp_by_cr[monster.challenge_rating];
+  }
+
   $('#players').append(header);
   $('#players').append(container);
+
+
+  var player_count = players.length ? players.length : 1;
+  var curr_rating = xp_threshold[difficulty] ? xp_threshold[difficulty] : 0;
+
+  $('#number_of_players').html(players.length);
+  $('#number_of_monsters').html(selected_monsters.length);
+  $('#current_difficulty').html(difficulty + " ( " + curr_rating + " < " + adjusted_xp + ")");
+  $('#current_xp').html(current_xp + " (" + parseInt(current_xp / player_count ) + ")");
+
+  $('#threshold_easy').html(xp_threshold.easy);
+  $('#threshold_medium').html(xp_threshold.medium);
+  $('#threshold_hard').html(xp_threshold.hard);
+  $('#threshold_deadly').html(xp_threshold.deadly);
 }
 
 function displaySelectedMonsters() {

@@ -11,7 +11,7 @@
             <div class="panel-heading">
                 <span class="fa-stack fa-5x">
                       <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                      <i class="fa fa-tree fa-stack-1x fa-inverse"></i>
+                      <i class="fa fa-male fa-stack-1x fa-inverse"></i>
                 </span>
             </div>
             <div class="panel-body">
@@ -25,7 +25,7 @@
             <div class="panel-heading">
                 <span class="fa-stack fa-5x">
                       <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                      <i class="fa fa-car fa-stack-1x fa-inverse"></i>
+                      <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
                 </span>
             </div>
             <div class="panel-body">
@@ -39,7 +39,7 @@
             <div class="panel-heading">
                 <span class="fa-stack fa-5x">
                       <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                      <i class="fa fa-support fa-stack-1x fa-inverse"></i>
+                      <i class="fa fa-heart-o fa-stack-1x fa-inverse"></i>
                 </span>
             </div>
             <div class="panel-body">
@@ -53,7 +53,7 @@
             <div class="panel-heading">
                 <span class="fa-stack fa-5x">
                       <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                      <i class="fa fa-database fa-stack-1x fa-inverse"></i>
+                      <i class="fa fa-pie-chart fa-stack-1x fa-inverse"></i>
                 </span>
             </div>
             <div class="panel-body">
@@ -63,6 +63,112 @@
         </div>
     </div>
 </div>
+
+<!-- Projects Row -->
+<div class="row">
+    <div class="col-md-6 img-portfolio">
+        <h3>Players</h3>
+        <hr />
+        <p>
+          <div class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Add Player</label>
+              <div class="col-sm-3">
+                <select id="level" class="form-control">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                </select>
+              </div>
+              <div class="col-sm-3">
+                <input type="button" id="add_player" value="Add" class="form-control">
+              </div>
+              <div class="col-sm-3"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="panel panel-success">
+                <div class="panel-heading">Easy</div>
+                <div class="panel-body" id="current_easy">12345678</div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="panel panel-warning">
+                <div class="panel-heading">Medium</div>
+                <div class="panel-body" id="current_medium">12345678</div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="panel panel-danger">
+                <div class="panel-heading">Hard</div>
+                <div class="panel-body" id="current_hard">12345678</div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="panel panel-primary">
+                <div class="panel-heading"  style="background-color: #333;">Deadly</div>
+                <div class="panel-body" id="current_deadly">12345678</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="current_players">
+            <ul class="nav nav-pills" role="tablist" id="stuff">
+              <li><a href="#">Home <span class="badge">42</span></a></li>
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Messages <span class="badge">3</span></a></li>
+            </ul>
+          </div>
+        </p>
+    </div>
+    <div class="col-md-6 img-portfolio">
+        <h3>Monsters</h3>
+        <hr />
+        <p>
+          <div id="current_monsters">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>CR</th>
+                  <th>Size</th>
+                  <th>Type</th>
+                  <th>XP</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </p>
+    </div>
+</div>
+<!-- /.row -->
 
 <table>
   <thead>
@@ -83,34 +189,6 @@
 </table>
 
 <br>
-
-<select id="level">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-  <option value="7">7</option>
-  <option value="8">8</option>
-  <option value="9">9</option>
-  <option value="10">10</option>
-  <option value="11">11</option>
-  <option value="12">12</option>
-  <option value="13">13</option>
-  <option value="14">14</option>
-  <option value="15">15</option>
-  <option value="16">16</option>
-  <option value="17">17</option>
-  <option value="18">18</option>
-  <option value="19">19</option>
-  <option value="20">20</option>
-</select>
-<input type="button" id="add_player" value="Add">
-
-<div id='players'></div>
-
-<div id='selected_monsters'></div>
 
 <div id='monsters'></div>
 

@@ -84,7 +84,7 @@ function difficulty(level, rating) {
 
 function getAllMonsters() {
   $.get( "5e-SRD-Monsters.json", function( data ) {
-    console.log("data: ", data);
+    // console.log("data: ", data);
     monsters = data;
     processMonsters();
     updateDisplay();
@@ -93,14 +93,14 @@ function getAllMonsters() {
 
 function addPlayerToEncounter(level) {
   players.push(level);
-  console.log("addplayer: ", level);
+  // console.log("addplayer: ", level);
   calculateXPThresholds();
   calculateAdjustedXp();
   updateDisplay();
 };
 
 function addMonsterToEncounter(name) {
-  console.log("=== name: ", name);
+  // console.log("=== name: ", name);
   for (var i = 0; i < monsters.length; i++) {
     var monster = monsters[i];
     if (monster.name == name) {
@@ -133,12 +133,12 @@ function calculateXPThresholds() {
     xp_threshold[level] = 0;
     for (var j = 0; j < players.length; j++) {
       var player = players[j];
-      console.log("player: ", player, " level: ", level);
+      // console.log("player: ", player, " level: ", level);
       xp_threshold[level] += difficulty(player, level);
     }
   }
 
-  console.log("xp_threshold: ", xp_threshold);
+  // console.log("xp_threshold: ", xp_threshold);
   return xp_threshold;
 }
 
@@ -151,7 +151,7 @@ function calculateAdjustedXp() {
   }
   adjusted_xp *= difficultyMultiplier(selected_monsters.length)
 
-  console.log("adjusted_xp: ", adjusted_xp);
+  // console.log("adjusted_xp: ", adjusted_xp);
   return adjusted_xp;
 }
 
@@ -179,10 +179,10 @@ function processMonsters() {
     }
   }
 
-  console.log("monsters_by_cr: ", monsters_by_cr);
+  // console.log("monsters_by_cr: ", monsters_by_cr);
   for (var i = 0; i < monsters.length; i++) {
     var monster = monsters[i];
-    console.log(monster);
+    // console.log(monster);
     monsters_by_cr[monster.challenge_rating].monsters.push(monster);
   }
 };
@@ -194,36 +194,49 @@ function updateDisplay() {
 }
 
 function displayMonsters() {
-  $('#monsters').html('');
+  var container = $('#monsters');
+  container.html('');
 
+  var row = $("<div />", {class:'row'});
   for (var i = 0; i < challenge_ratings.length; i++) {
-      var cr = challenge_ratings[i];
-      var cr_xp = monsters_xp_by_cr[cr];
-      var calculated = adjusted_xp + cr_xp;
-      console.log("==== cr_xp: ", cr_xp, " adjusted_xp: ", adjusted_xp, " calculated: ", calculated);
-      var difficulty = getDifficultyRating(xp_threshold, calculated);
-      var header = $('<h3> Challenge Rating: ' + cr + ', Difficulty: ' + difficulty + '</h3>');
-      var container = $("<ul />");
-      for (var j = 0; j < monsters_by_cr[cr].monsters.length; j++) {
-        var monster = monsters_by_cr[cr].monsters[j];
-        var input = $('<input />', { type: 'button', value: '+', id: 'add_monster', class: 'add_monster', name: monster.name});
-        var list = $('<li id="id'+monster.name+'" name="name'+monster.name+'">' + monster.name + '</li>').append(input);
-        container.append(list);
-      }
+    var cr = challenge_ratings[i];
+    var cr_xp = monsters_xp_by_cr[cr];
+    var calculated = adjusted_xp + cr_xp;
+    var difficulty = getDifficultyRating(xp_threshold, calculated);
 
-      $('#monsters').append(header);
-      $('#monsters').append(container);
+    var block = $("<div />", {class: 'col-md-3'});
+    var header = $('<h4>CR: ' + cr + ', Difficulty: ' + difficulty + '</h4>');
+
+    var ul = $("<ul class='list-group'/>");
+    for (var j = 0; j < monsters_by_cr[cr].monsters.length; j++) {
+      var monster = monsters_by_cr[cr].monsters[j];
+      var input = $('<button />', {type: "button", id: 'add_monster', class: 'add_monster btn btn-primary badge', name: monster.name}).append('add');
+      var li = $("<li />", {class: "list-group-item", id: 'id'+monster.name}).append(monster.name);
+      li.append(input);
+      ul.append(li);
+    }
+
+    if (monsters_by_cr[cr].monsters.length) {
+      block.append(header);
+      block.append(ul);
+      row.append(block);
+    }
+
+    if ((i % 4) >= 3) {
+      container.append(row);
+      var row = $("<div />", {class:'row'});
+    }
   }
 }
 
 function displayPlayers() {
-  $('#players').html('');
-
-  var header = $('<h3> Players: ' + players.length + ', Difficulties: ' + JSON.stringify(xp_threshold) + '</h3>');
-  var container = $("<ul />");
+  var container = $("#current_players ul");
+  container.html('');
   for (var i = 0; i < players.length; i++) {
     var player = players[i];
-    container.append('<li id="id' + player + '" name="name' + player + '">Level ' + player + '</li>');
+    var li = $("<li />", {id: player, name: "name"+player, class: "presentation"});
+    li.append($("<a />").append("Level: " + player));
+    container.append(li);
   }
 
   var difficulty = getDifficultyRating(xp_threshold, adjusted_xp);
@@ -233,10 +246,6 @@ function displayPlayers() {
     current_xp += monsters_xp_by_cr[monster.challenge_rating];
   }
 
-  $('#players').append(header);
-  $('#players').append(container);
-
-
   var player_count = players.length ? players.length : 1;
   var curr_rating = xp_threshold[difficulty] ? xp_threshold[difficulty] : 0;
 
@@ -245,24 +254,27 @@ function displayPlayers() {
   $('#current_difficulty').html(difficulty + " ( " + curr_rating + " < " + adjusted_xp + ")");
   $('#current_xp').html(current_xp + " (" + parseInt(current_xp / player_count ) + ")");
 
-  $('#threshold_easy').html(xp_threshold.easy);
-  $('#threshold_medium').html(xp_threshold.medium);
-  $('#threshold_hard').html(xp_threshold.hard);
-  $('#threshold_deadly').html(xp_threshold.deadly);
+  $('#current_easy').html(xp_threshold.Easy);
+  $('#current_medium').html(xp_threshold.Medium);
+  $('#current_hard').html(xp_threshold.Hard);
+  $('#current_deadly').html(xp_threshold.Deadly);
 }
 
 function displaySelectedMonsters() {
-  $('#selected_monsters').html('');
-
-  var header = $('<h3> Rating: ' + getDifficultyRating(xp_threshold, adjusted_xp) + ' ('+ adjusted_xp +')'+ '</h3>');
-  var container = $("<ul />");
+  var container = $("#current_monsters table tbody");
+  container.html('');
   for (var i = 0; i < selected_monsters.length; i++) {
     var monster = selected_monsters[i];
-    container.append('<li id="id' + monster.name + '" name="name' + monster.name + '">' + monster.name + '</li>');
+    var tr = $('<tr />');
+    tr.append($('<td>' + monster.name + '</td>'));
+    tr.append($('<td>' + monster.challenge_rating + '</td>'));
+    tr.append($('<td>' + monster.size + '</td>'));
+    tr.append($('<td>' + monster.type + '</td>'));
+    tr.append($('<td>' + monsters_xp_by_cr[monster.challenge_rating] + '</td>'));
+    tr.append($('<td>' + "remove" + '</td>'));
+    container.append(tr);
   }
 
-  $('#selected_monsters').append(header);
-  $('#selected_monsters').append(container);
 }
 
 getAllMonsters();
@@ -274,7 +286,7 @@ $(document).ready(function() {
   });
 
   $("#monsters").on('click', '.add_monster', function(event) {
-    console.log(event.target.name);
+    // console.log(event.target.name);
     addMonsterToEncounter(event.target.name);
   });
 });

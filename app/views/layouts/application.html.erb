@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Criticalhit</title>
+    <title>Critical Hit</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -22,16 +22,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+                <%= link_to("Critical Hit", design_path, {class: "navbar-brand"}) %>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="about.html">About</a>
+                        <%= link_to("Design", design_path) %>
                     </li>
                     <li class="active">
-                        <a href="services.html">Services</a>
+                        <%= link_to("Encounters", encounters_path) %>
                     </li>
                     <li>
                         <a href="contact.html">Contact</a>
@@ -123,7 +123,16 @@
       <footer>
           <div class="row">
               <div class="col-lg-12">
-                  <p>Copyright &copy; Your Website 2014</p>
+                  <p>Copyright &copy; Critical Hit 2014</p>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12">
+                Wizards of the Coast, Dungeons & Dragons, and their logos are trademarks of
+                Wizards of the Coast LLC in the United States and other countries.
+                © 2015 Wizards. All Rights Reserved.
+                Critica Hit is not affiliated with, endorsed, sponsored, or specifically approved by
+                Wizards of the Coast LLC.
               </div>
           </div>
       </footer>

@@ -1,0 +1,180 @@
+<p id="notice"><%= notice %></p>
+
+<!-- Service Panels -->
+<!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header">Encounter Breakdown</h2>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <span class="fa-stack fa-5x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-male fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="panel-body">
+                <h4>Number of Players</h4>
+                <p><h3 id="number_of_players"></h3></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <span class="fa-stack fa-5x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="panel-body">
+                <h4>Number of Monsters</h4>
+                <p><h3 id="number_of_monsters"></h3></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <span class="fa-stack fa-5x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-heart-o fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="panel-body">
+                <h4>Difficulty</h4>
+                <p><h3 id="current_difficulty"></h3></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <span class="fa-stack fa-5x">
+                      <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                      <i class="fa fa-pie-chart fa-stack-1x fa-inverse"></i>
+                </span>
+            </div>
+            <div class="panel-body">
+                <h4>Experience Points</h4>
+                <p><h3 id="current_xp" ></h3></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Projects Row -->
+<div class="row">
+    <div class="col-md-6 img-portfolio">
+        <h3>Players</h3>
+        <hr />
+        <p>
+          <div class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Add Player</label>
+              <div class="col-sm-3">
+                <select id="level" class="form-control">
+                  <option value="1">Level 1</option>
+                  <option value="2">Level 2</option>
+                  <option value="3">Level 3</option>
+                  <option value="4">Level 4</option>
+                  <option value="5">Level 5</option>
+                  <option value="6">Level 6</option>
+                  <option value="7">Level 7</option>
+                  <option value="8">Level 8</option>
+                  <option value="9">Level 9</option>
+                  <option value="10">Level 10</option>
+                  <option value="11">Level 11</option>
+                  <option value="12">Level 12</option>
+                  <option value="13">Level 13</option>
+                  <option value="14">Level 14</option>
+                  <option value="15">Level 15</option>
+                  <option value="16">Level 16</option>
+                  <option value="17">Level 17</option>
+                  <option value="18">Level 18</option>
+                  <option value="19">Level 19</option>
+                  <option value="20">Level 20</option>
+                </select>
+              </div>
+              <div class="col-sm-3">
+                <input type="button" id="add_player" value="Add" class="form-control">
+              </div>
+              <div class="col-sm-3"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="panel panel-success">
+                <div class="panel-heading">Easy</div>
+                <div class="panel-body" id="current_easy">12345678</div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="panel panel-warning">
+                <div class="panel-heading">Medium</div>
+                <div class="panel-body" id="current_medium">12345678</div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="panel panel-danger">
+                <div class="panel-heading">Hard</div>
+                <div class="panel-body" id="current_hard">12345678</div>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="panel panel-primary">
+                <div class="panel-heading"  style="background-color: #333;">Deadly</div>
+                <div class="panel-body" id="current_deadly">12345678</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="current_players">
+            <ul class="nav nav-pills" role="tablist" id="stuff">
+              <li><a href="#">Home <span class="badge">42</span></a></li>
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Messages <span class="badge">3</span></a></li>
+            </ul>
+          </div>
+        </p>
+    </div>
+    <div class="col-md-6 img-portfolio">
+        <h3>Monsters</h3>
+        <hr />
+        <p>
+          <div id="current_monsters">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>CR</th>
+                  <th>Size</th>
+                  <th>Type</th>
+                  <th>XP</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </p>
+    </div>
+</div>
+<!-- /.row -->
+
+<hr />
+
+<div class="row">
+  <h2>Monster Library</h2>
+  <div class="row">
+    <div id='monsters'></div>
+  </div>
+</div>

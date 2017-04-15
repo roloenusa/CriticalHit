@@ -85,7 +85,7 @@ function difficulty(level, rating) {
 function getAllMonsters() {
   $.get( "5e-SRD-Monsters.json", function( data ) {
     // console.log("data: ", data);
-    monsters = data;
+    monsters = data.monsters;
     processMonsters();
     updateDisplay();
   });

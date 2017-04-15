@@ -5,6 +5,13 @@ class EncountersController < ApplicationController
   # GET /encounters.json
   def index
     @heading = "Encounters"
+    @encounters = Encounter.all
+  end
+
+  # GET /design
+  # GET /design.json
+  def design
+    @heading = "Encounters"
     @subheading = "Designer"
     @encounters = Encounter.all
   end

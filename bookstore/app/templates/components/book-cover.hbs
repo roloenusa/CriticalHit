@@ -1,7 +1,7 @@
 <li {{action "open"}}>
   <strong>{{book.title}}</strong><br><br>
   <em>by</em>
-  {{book.author.name}}
+  {{link-to book.author.name 'author' book.author.id class="author" }}
 </li>
 
 {{#if isShowingModal}}

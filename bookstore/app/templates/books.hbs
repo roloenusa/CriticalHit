@@ -3,3 +3,7 @@
     {{book-cover book=book blurBackground=(route-action "blurBackground")}}
   {{/each}}
 </ul>
+
+{{#if showAll}}
+  <button {{action 'showAll'}}>Show All</button>
+{{/if}}

@@ -1,5 +1,7 @@
 <h2 id="title">
-  {{link-to "Our Awesome Bookstore" 'books'}}
+  {{#link-to 'books'}}Our Awesome Bookstore{{/link-to}}
 </h2>
 
-{{outlet}}
+<div class="{{if blur 'blur-background' ''}}">
+  {{outlet}}
+</div>

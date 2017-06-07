@@ -1,0 +1,704 @@
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateAuthors (20170603080558)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "authors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170603080558"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateBooks (20170603080607)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "books" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "price" decimal(5,2), "author_id" integer, "publisher_type" varchar, "publisher_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_books_on_author_id" ON "books" ("author_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_books_on_author_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_books_on_author_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_books_on_publisher_type_and_publisher_id" ON "books" ("publisher_type", "publisher_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170603080607"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePublishingHouses (20170603080620)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "publishing_houses" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "discount" decimal(2,2), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170603080620"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2017-06-03 08:06:24.447280"], ["updated_at", "2017-06-03 08:06:24.447280"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_books_on_publisher_type_and_publisher_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_books_on_publisher_type_and_publisher_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_books_on_author_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_books_on_author_id' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_books_on_publisher_type_and_publisher_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_books_on_publisher_type_and_publisher_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_books_on_author_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_books_on_author_id' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "publishing_houses" ("name", "discount", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "ABC Publisher"], ["discount", 40.0], ["created_at", "2017-06-05 06:10:11.042812"], ["updated_at", "2017-06-05 06:10:11.042812"]]
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "publishing_houses" ("name", "discount", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Acme Publishing House"], ["discount", 50.0], ["created_at", "2017-06-05 06:10:11.049640"], ["updated_at", "2017-06-05 06:10:11.049640"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "publishing_houses" ("name", "discount", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Foobar Corporation"], ["discount", 55.0], ["created_at", "2017-06-05 06:10:11.053490"], ["updated_at", "2017-06-05 06:10:11.053490"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "James Jackson"], ["created_at", "2017-06-05 06:10:11.062921"], ["updated_at", "2017-06-05 06:10:11.062921"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Roberta Rock"], ["created_at", "2017-06-05 06:10:11.069400"], ["updated_at", "2017-06-05 06:10:11.069400"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Daniel Duck"], ["created_at", "2017-06-05 06:10:11.071828"], ["updated_at", "2017-06-05 06:10:11.071828"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Amanda Djidjinski"], ["created_at", "2017-06-05 06:10:11.073968"], ["updated_at", "2017-06-05 06:10:11.073968"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Zoe Zack"], ["created_at", "2017-06-05 06:10:11.076084"], ["updated_at", "2017-06-05 06:10:11.076084"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Bill Burray"], ["created_at", "2017-06-05 06:10:11.078368"], ["updated_at", "2017-06-05 06:10:11.078368"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "authors" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Charlie Chuck"], ["created_at", "2017-06-05 06:10:11.080488"], ["updated_at", "2017-06-05 06:10:11.080488"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "The Great Escape"], ["price", 24.2], ["author_id", 7], ["publisher_type", "PublishingHouse"], ["publisher_id", 1], ["created_at", "2017-06-05 06:10:11.103996"], ["updated_at", "2017-06-05 06:10:11.103996"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Saving Myself"], ["price", 14.13], ["author_id", 6], ["publisher_type", "PublishingHouse"], ["publisher_id", 1], ["created_at", "2017-06-05 06:10:11.107737"], ["updated_at", "2017-06-05 06:10:11.107737"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "The Killer Doctors"], ["price", 15.12], ["author_id", 5], ["publisher_type", "PublishingHouse"], ["publisher_id", 1], ["created_at", "2017-06-05 06:10:11.110831"], ["updated_at", "2017-06-05 06:10:11.110831"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Marianne"], ["price", 10.5], ["author_id", 4], ["publisher_type", "PublishingHouse"], ["publisher_id", 1], ["created_at", "2017-06-05 06:10:11.113862"], ["updated_at", "2017-06-05 06:10:11.113862"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "On the Verge of Salvation"], ["price", 11.76], ["author_id", 4], ["publisher_type", "PublishingHouse"], ["publisher_id", 2], ["created_at", "2017-06-05 06:10:11.117076"], ["updated_at", "2017-06-05 06:10:11.117076"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Fields of L"], ["price", 27.87], ["author_id", 3], ["publisher_type", "PublishingHouse"], ["publisher_id", 2], ["created_at", "2017-06-05 06:10:11.120024"], ["updated_at", "2017-06-05 06:10:11.120024"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Waterfront"], ["price", 11.97], ["author_id", 2], ["publisher_type", "PublishingHouse"], ["publisher_id", 2], ["created_at", "2017-06-05 06:10:11.122922"], ["updated_at", "2017-06-05 06:10:11.122922"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Bored as Hell"], ["price", 10.96], ["author_id", 6], ["publisher_type", "PublishingHouse"], ["publisher_id", 3], ["created_at", "2017-06-05 06:10:11.125652"], ["updated_at", "2017-06-05 06:10:11.125652"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "History of the Silk Road"], ["price", 8.1], ["author_id", 7], ["publisher_type", "PublishingHouse"], ["publisher_id", 3], ["created_at", "2017-06-05 06:10:11.128532"], ["updated_at", "2017-06-05 06:10:11.128532"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Something for Later"], ["price", 9.54], ["author_id", 1], ["publisher_type", "Author"], ["publisher_id", 1], ["created_at", "2017-06-05 06:10:11.131408"], ["updated_at", "2017-06-05 06:10:11.131408"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "What If"], ["price", 13.32], ["author_id", 3], ["publisher_type", "Author"], ["publisher_id", 3], ["created_at", "2017-06-05 06:10:11.134152"], ["updated_at", "2017-06-05 06:10:11.134152"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Lilly Reborn"], ["price", 16.43], ["author_id", 4], ["publisher_type", "PublishingHouse"], ["publisher_id", 3], ["created_at", "2017-06-05 06:10:11.136830"], ["updated_at", "2017-06-05 06:10:11.136830"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Anathema"], ["price", 9.41], ["author_id", 5], ["publisher_type", "Author"], ["publisher_id", 5], ["created_at", "2017-06-05 06:10:11.139606"], ["updated_at", "2017-06-05 06:10:11.139606"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Best Of"], ["price", 12.24], ["author_id", 2], ["publisher_type", "PublishingHouse"], ["publisher_id", 3], ["created_at", "2017-06-05 06:10:11.142619"], ["updated_at", "2017-06-05 06:10:11.142619"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Anyway"], ["price", 19.99], ["author_id", 6], ["publisher_type", "PublishingHouse"], ["publisher_id", 3], ["created_at", "2017-06-05 06:10:11.145577"], ["updated_at", "2017-06-05 06:10:11.145577"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/publishing_houses" for 127.0.0.1 at 2017-06-04 23:13:07 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by PublishingHousesController#index as */*
+  [1m[36mPublishingHouse Load (0.2ms)[0m  [1m[34mSELECT "publishing_houses".* FROM "publishing_houses"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (5.23ms)
+Completed 200 OK in 30ms (Views: 26.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/publishing_houses" for 127.0.0.1 at 2017-06-04 23:14:14 -0700
+Processing by PublishingHousesController#index as */*
+  [1m[36mPublishingHouse Load (0.4ms)[0m  [1m[34mSELECT "publishing_houses".* FROM "publishing_houses"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (2.1ms)
+Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2017-06-04 23:27:42 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.3) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.3) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.3) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.3) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.3) lib/rails/engine.rb:522:in `call'
+puma (3.9.0) lib/puma/configuration.rb:224:in `call'
+puma (3.9.0) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.0) lib/puma/server.rb:435:in `process_client'
+puma (3.9.0) lib/puma/server.rb:299:in `block in run'
+puma (3.9.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started GET "/books" for 127.0.0.1 at 2017-06-04 23:27:55 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers]   [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mPublishingHouse Load (0.1ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mPublishingHouse Load (0.1ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mPublishingHouse Load (0.1ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "publishing_houses".* FROM "publishing_houses" WHERE "publishing_houses"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (96.32ms)
+Completed 200 OK in 124ms (Views: 113.9ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/authors/2" for 127.0.0.1 at 2017-06-04 23:31:11 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (0.93ms)
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/authors/1" for 127.0.0.1 at 2017-06-04 23:54:51 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (1.2ms)
+Completed 200 OK in 12ms (Views: 2.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/authors/1" for 127.0.0.1 at 2017-06-04 23:57:01 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (0.68ms)
+Completed 200 OK in 3ms (Views: 1.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/books" for 127.0.0.1 at 2017-06-04 23:57:38 -0700
+Processing by BooksController#create as JSONAPI
+  Parameters: {"data"=>{"attributes"=>{"title"=>"Ember and Coal", "price"=>9.99}, "relationships"=>{"author"=>{"data"=>{"type"=>"authors", "id"=>"1"}}, "publisher"=>{"data"=>{"type"=>"authors", "id"=>"1"}}}, "type"=>"books"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "books" ("title", "price", "author_id", "publisher_type", "publisher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["title", "Ember and Coal"], ["price", 9.99], ["author_id", 1], ["publisher_type", "Author"], ["publisher_id", 1], ["created_at", "2017-06-05 06:57:38.984548"], ["updated_at", "2017-06-05 06:57:38.984548"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+[active_model_serializers] Rendered BookSerializer with ActiveModelSerializers::Adapter::JsonApi (2.34ms)
+Completed 201 Created in 30ms (Views: 4.8ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/authors/4" for 127.0.0.1 at 2017-06-05 00:01:02 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"4"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (0.68ms)
+Completed 200 OK in 11ms (Views: 1.9ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/authors/4" for 127.0.0.1 at 2017-06-05 00:04:04 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"4"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 4]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 4], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (39.3ms)
+Completed 200 OK in 57ms (Views: 40.5ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:18:22 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (34.64ms)
+Completed 200 OK in 40ms (Views: 38.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:19:19 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (22.58ms)
+Completed 200 OK in 27ms (Views: 25.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:19:56 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (18.95ms)
+Completed 200 OK in 22ms (Views: 21.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/authors/7" for 127.0.0.1 at 2017-06-07 09:19:56 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"7"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 7]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 7], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (13.1ms)
+Completed 200 OK in 16ms (Views: 13.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/authors/6" for 127.0.0.1 at 2017-06-07 09:19:56 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"6"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 6]]
+[active_model_serializers]   [1m[36mBook Load (0.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 6], ["publisher_type", "Author"]]
+Started GET "/authors/4" for 127.0.0.1 at 2017-06-07 09:19:56 -0700
+Started GET "/authors/3" for 127.0.0.1 at 2017-06-07 09:19:56 -0700
+Started GET "/authors/2" for 127.0.0.1 at 2017-06-07 09:19:56 -0700
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (11.82ms)
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"4"}
+Started GET "/authors/5" for 127.0.0.1 at 2017-06-07 09:19:56 -0700
+Processing by AuthorsController#show as JSONAPI
+Processing by AuthorsController#show as JSONAPI
+Completed 200 OK in 19ms (Views: 17.2ms | ActiveRecord: 0.4ms)
+
+
+  [1m[36mAuthor Load (0.6ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"2"}
+  Parameters: {"id"=>"3"}
+[active_model_serializers]   [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 4]]
+Started GET "/authors/1" for 127.0.0.1 at 2017-06-07 09:19:56 -0700
+  Parameters: {"id"=>"5"}
+  [1m[36mAuthor Load (0.4ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAuthor Load (0.5ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 4], ["publisher_type", "Author"]]
+Processing by AuthorsController#show as JSONAPI
+  [1m[36mAuthor Load (0.6ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 2]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 3]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (23.59ms)
+  Parameters: {"id"=>"1"}
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 5]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 2], ["publisher_type", "Author"]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 3], ["publisher_type", "Author"]]
+Completed 200 OK in 37ms (Views: 32.2ms | ActiveRecord: 1.1ms)
+
+
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 5], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (26.54ms)
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (26.37ms)
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 1]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (26.88ms)
+Completed 200 OK in 47ms (Views: 38.7ms | ActiveRecord: 0.9ms)
+
+
+Completed 200 OK in 47ms (Views: 35.0ms | ActiveRecord: 1.0ms)
+
+
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 1], ["publisher_type", "Author"]]
+Completed 200 OK in 47ms (Views: 33.5ms | ActiveRecord: 1.0ms)
+
+
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (17.68ms)
+Completed 200 OK in 34ms (Views: 21.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:25:02 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (23.91ms)
+Completed 200 OK in 27ms (Views: 26.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/authors/7" for 127.0.0.1 at 2017-06-07 09:25:03 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"7"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 7]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 7], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (12.77ms)
+Completed 200 OK in 15ms (Views: 13.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/authors/6" for 127.0.0.1 at 2017-06-07 09:25:03 -0700
+Processing by AuthorsController#show as JSONAPI
+Started GET "/authors/4" for 127.0.0.1 at 2017-06-07 09:25:03 -0700
+  Parameters: {"id"=>"6"}
+Started GET "/authors/3" for 127.0.0.1 at 2017-06-07 09:25:03 -0700
+Started GET "/authors/5" for 127.0.0.1 at 2017-06-07 09:25:03 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"4"}
+Started GET "/authors/2" for 127.0.0.1 at 2017-06-07 09:25:03 -0700
+Processing by AuthorsController#show as JSONAPI
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+Processing by AuthorsController#show as JSONAPI
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"3"}
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 6]]
+  Parameters: {"id"=>"5"}
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 4]]
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 6], ["publisher_type", "Author"]]
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 4], ["publisher_type", "Author"]]
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 3]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (22.65ms)
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 5]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (26.19ms)
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 2]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 3], ["publisher_type", "Author"]]
+Completed 200 OK in 44ms (Views: 36.9ms | ActiveRecord: 0.8ms)
+
+
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 5], ["publisher_type", "Author"]]
+Completed 200 OK in 43ms (Views: 35.7ms | ActiveRecord: 0.7ms)
+
+
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 2], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (32.62ms)
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (32.16ms)
+Started GET "/authors/1" for 127.0.0.1 at 2017-06-07 09:25:03 -0700
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (31.17ms)
+Completed 200 OK in 56ms (Views: 47.7ms | ActiveRecord: 0.5ms)
+
+
+Completed 200 OK in 53ms (Views: 39.9ms | ActiveRecord: 0.6ms)
+
+
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 52ms (Views: 34.2ms | ActiveRecord: 0.7ms)
+
+
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 1], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (14.82ms)
+Completed 200 OK in 18ms (Views: 15.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:25:12 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (27.23ms)
+Completed 200 OK in 31ms (Views: 29.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/authors/7" for 127.0.0.1 at 2017-06-07 09:25:12 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"7"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 7]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 7], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (12.4ms)
+Completed 200 OK in 15ms (Views: 13.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/authors/6" for 127.0.0.1 at 2017-06-07 09:25:12 -0700
+Started GET "/authors/4" for 127.0.0.1 at 2017-06-07 09:25:12 -0700
+Started GET "/authors/3" for 127.0.0.1 at 2017-06-07 09:25:12 -0700
+Processing by AuthorsController#show as JSONAPI
+Started GET "/authors/5" for 127.0.0.1 at 2017-06-07 09:25:12 -0700
+Processing by AuthorsController#show as JSONAPI
+Started GET "/authors/2" for 127.0.0.1 at 2017-06-07 09:25:12 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"3"}
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"6"}
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"2"}
+  Parameters: {"id"=>"4"}
+  Parameters: {"id"=>"5"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 6]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 3]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 2]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 4]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 5]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 6], ["publisher_type", "Author"]]
+[active_model_serializers]   [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 3], ["publisher_type", "Author"]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 2], ["publisher_type", "Author"]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 4], ["publisher_type", "Author"]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 5], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (49.19ms)
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (50.76ms)
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (51.62ms)
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (51.79ms)
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (50.51ms)
+Completed 200 OK in 72ms (Views: 68.1ms | ActiveRecord: 0.5ms)
+
+
+Completed 200 OK in 73ms (Views: 64.2ms | ActiveRecord: 0.9ms)
+
+
+Completed 200 OK in 72ms (Views: 60.8ms | ActiveRecord: 0.6ms)
+
+
+Completed 200 OK in 72ms (Views: 56.4ms | ActiveRecord: 0.8ms)
+
+
+Completed 200 OK in 71ms (Views: 52.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/authors/1" for 127.0.0.1 at 2017-06-07 09:25:13 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 1], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (12.77ms)
+Completed 200 OK in 15ms (Views: 13.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:32:03 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (25.05ms)
+Completed 200 OK in 29ms (Views: 28.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/authors/7" for 127.0.0.1 at 2017-06-07 09:32:03 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"7"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 7]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 7], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (16.85ms)
+Completed 200 OK in 21ms (Views: 18.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/authors/6" for 127.0.0.1 at 2017-06-07 09:32:03 -0700
+Started GET "/authors/4" for 127.0.0.1 at 2017-06-07 09:32:03 -0700
+Processing by AuthorsController#show as JSONAPI
+Started GET "/authors/5" for 127.0.0.1 at 2017-06-07 09:32:03 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"6"}
+Started GET "/authors/3" for 127.0.0.1 at 2017-06-07 09:32:03 -0700
+Started GET "/authors/2" for 127.0.0.1 at 2017-06-07 09:32:03 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"4"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+Processing by AuthorsController#show as JSONAPI
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"5"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 6]]
+  Parameters: {"id"=>"3"}
+  Parameters: {"id"=>"2"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 4]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 6], ["publisher_type", "Author"]]
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 5]]
+[active_model_serializers]   [1m[36mBook Load (0.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 4], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (27.4ms)
+[active_model_serializers]   [1m[36mBook Load (0.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 3]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 2]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 5], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (39.75ms)
+Completed 200 OK in 52ms (Views: 46.2ms | ActiveRecord: 1.0ms)
+
+
+[active_model_serializers]   [1m[36mBook Load (0.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 3], ["publisher_type", "Author"]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 2], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (45.01ms)
+Completed 200 OK in 62ms (Views: 53.7ms | ActiveRecord: 0.6ms)
+
+
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (36.82ms)
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (36.69ms)
+Started GET "/authors/1" for 127.0.0.1 at 2017-06-07 09:32:03 -0700
+Completed 200 OK in 66ms (Views: 56.0ms | ActiveRecord: 0.9ms)
+
+
+Completed 200 OK in 60ms (Views: 43.4ms | ActiveRecord: 0.5ms)
+
+
+Completed 200 OK in 60ms (Views: 40.4ms | ActiveRecord: 0.6ms)
+
+
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 1], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (9.98ms)
+Completed 200 OK in 13ms (Views: 10.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:32:20 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (19.38ms)
+Completed 200 OK in 23ms (Views: 22.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/authors/7" for 127.0.0.1 at 2017-06-07 09:32:20 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"7"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.8ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 7]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 7], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (15.56ms)
+Completed 200 OK in 18ms (Views: 15.4ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/authors/6" for 127.0.0.1 at 2017-06-07 09:32:20 -0700
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"6"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+Started GET "/authors/5" for 127.0.0.1 at 2017-06-07 09:32:20 -0700
+Started GET "/authors/4" for 127.0.0.1 at 2017-06-07 09:32:20 -0700
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 6]]
+Started GET "/authors/2" for 127.0.0.1 at 2017-06-07 09:32:20 -0700
+Started GET "/authors/3" for 127.0.0.1 at 2017-06-07 09:32:20 -0700
+Processing by AuthorsController#show as JSONAPI
+Processing by AuthorsController#show as JSONAPI
+[active_model_serializers]   [1m[36mBook Load (0.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 6], ["publisher_type", "Author"]]
+Processing by AuthorsController#show as JSONAPI
+Processing by AuthorsController#show as JSONAPI
+  Parameters: {"id"=>"5"}
+  Parameters: {"id"=>"4"}
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (18.07ms)
+  Parameters: {"id"=>"2"}
+  Parameters: {"id"=>"3"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 26ms (Views: 20.6ms | ActiveRecord: 0.5ms)
+
+
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 5]]
+[active_model_serializers]   [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 4]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 2]]
+Started GET "/authors/1" for 127.0.0.1 at 2017-06-07 09:32:20 -0700
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 3]]
+[active_model_serializers]   [1m[36mBook Load (0.1ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 5], ["publisher_type", "Author"]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 4], ["publisher_type", "Author"]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 2], ["publisher_type", "Author"]]
+Processing by AuthorsController#show as JSONAPI
+[active_model_serializers]   [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 3], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (34.02ms)
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (36.42ms)
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (38.01ms)
+  Parameters: {"id"=>"1"}
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (37.5ms)
+Completed 200 OK in 56ms (Views: 51.4ms | ActiveRecord: 0.4ms)
+
+
+Completed 200 OK in 56ms (Views: 48.4ms | ActiveRecord: 0.7ms)
+
+
+Completed 200 OK in 55ms (Views: 44.9ms | ActiveRecord: 0.5ms)
+
+
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 55ms (Views: 40.0ms | ActiveRecord: 0.8ms)
+
+
+[active_model_serializers]   [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."author_id" = ?[0m  [["author_id", 1]]
+[active_model_serializers]   [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."publisher_id" = ? AND "books"."publisher_type" = ?[0m  [["publisher_id", 1], ["publisher_type", "Author"]]
+[active_model_serializers] Rendered AuthorSerializer with ActiveModelSerializers::Adapter::JsonApi (12.35ms)
+Completed 200 OK in 17ms (Views: 12.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:58:03 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (19.12ms)
+Completed 200 OK in 23ms (Views: 22.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:58:30 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (22.57ms)
+Completed 200 OK in 27ms (Views: 26.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:58:47 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.3ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (21.43ms)
+Completed 200 OK in 24ms (Views: 23.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/books" for 127.0.0.1 at 2017-06-07 09:58:51 -0700
+Processing by BooksController#index as JSONAPI
+  [1m[36mBook Load (0.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::JsonApi (16.39ms)
+Completed 200 OK in 19ms (Views: 18.5ms | ActiveRecord: 0.2ms)
+
+

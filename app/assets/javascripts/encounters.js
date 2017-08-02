@@ -281,7 +281,7 @@ getAllMonsters();
 
 $(document).ready(function() {
   $("#add_player").click(function() {
-    var level = $('#level option:selected').text();
+    var level = $('#level option:selected').val();
     addPlayerToEncounter(level);
   });
 

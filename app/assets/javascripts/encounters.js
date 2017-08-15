@@ -197,47 +197,41 @@ function displayMonsters() {
   var container = $('#monsters');
   container.html('');
 
-  var row = $("<div />", {class:'row'});
+  var crs = [];
+  var monsterRow = [];
   for (var i = 0; i < challenge_ratings.length; i++) {
     var cr = challenge_ratings[i];
     var cr_xp = monsters_xp_by_cr[cr];
     var calculated = adjusted_xp + cr_xp;
     var difficulty = getDifficultyRating(xp_threshold, calculated);
 
-    var block = $("<div />", {class: 'col-md-3'});
-    var header = $('<h4>CR: ' + cr + ', Difficulty: ' + difficulty + '</h4>');
+    var monster_list = [];
+    monster_list.challenge_rating = cr;
+    monster_list.difficulty = difficulty;
 
-    var ul = $("<ul class='list-group'/>");
-    for (var j = 0; j < monsters_by_cr[cr].monsters.length; j++) {
-      var monster = monsters_by_cr[cr].monsters[j];
-      var input = $('<button />', {type: "button", id: 'add_monster', class: 'add_monster btn btn-primary badge', name: monster.name}).append('add');
-      var li = $("<li />", {class: "list-group-item", id: 'id'+monster.name}).append(monster.name);
-      li.append(input);
-      ul.append(li);
+    if (!monsters_by_cr[cr].monsters.length) {
+      continue;
     }
 
-    if (monsters_by_cr[cr].monsters.length) {
-      block.append(header);
-      block.append(ul);
-      row.append(block);
-    }
-
-    if ((i % 4) >= 3) {
-      container.append(row);
-      var row = $("<div />", {class:'row'});
+    monster_list.monsters = monsters_by_cr[cr].monsters;
+    monsterRow.push(monster_list);
+    if ((monsterRow.length % 4) == 0) {
+      crs.push({monsters: monsterRow});
+      monsterRow = [];
     }
   }
+
+  container.html(Mustache.render(renderMonsters(), {crs: crs}));
 }
 
 function displayPlayers() {
-  var container = $("#current_players ul");
-  container.html('');
+  var selectedPlayers = [];
   for (var i = 0; i < players.length; i++) {
-    var player = players[i];
-    var li = $("<li />", {id: player, name: "name"+player, class: "presentation"});
-    li.append($("<a />").append("Level: " + player));
-    container.append(li);
+    selectedPlayers.push({
+      level: players[i],
+    })
   }
+  $("#currentPlayers").html(Mustache.render(renderSelectedPlayer(), {selectedPlayers: selectedPlayers}));
 
   var difficulty = getDifficultyRating(xp_threshold, adjusted_xp);
   var current_xp = 0;
@@ -249,32 +243,147 @@ function displayPlayers() {
   var player_count = players.length ? players.length : 1;
   var curr_rating = xp_threshold[difficulty] ? xp_threshold[difficulty] : 0;
 
-  $('#number_of_players').html(players.length);
-  $('#number_of_monsters').html(selected_monsters.length);
-  $('#current_difficulty').html(difficulty + " ( " + curr_rating + " < " + adjusted_xp + ")");
-  $('#current_xp').html(current_xp + " (" + parseInt(current_xp / player_count ) + ")");
 
-  $('#current_easy').html(xp_threshold.Easy);
-  $('#current_medium').html(xp_threshold.Medium);
-  $('#current_hard').html(xp_threshold.Hard);
-  $('#current_deadly').html(xp_threshold.Deadly);
+  var hud = [];
+  var item = {}
+  item.icon = 'fa-male';
+  item.name = 'Number of Players';
+  item.value = players.length;
+  hud.push(item);
+
+  var item = {}
+  item.icon = 'fa-qq';
+  item.name = 'Number of Monsters';
+  item.value = selected_monsters.length;
+  hud.push(item);
+
+  var item = {}
+  item.icon = 'fa-heart-o';
+  item.name = 'Difficulty';
+  item.value = difficulty + " ( " + curr_rating + " < " + adjusted_xp + ")";
+  hud.push(item);
+
+  var item = {}
+  item.icon = 'fa-pie-chart';
+  item.name = 'Experience Points';
+  item.value = current_xp + " (" + parseInt(current_xp / player_count ) + ")";
+  hud.push(item);
+
+  $("#encounterHUD").html(Mustache.render(renderHUD(), {hud: hud}));
+
+  var difficulties = [];
+  jQuery.each( xp_threshold, function( key, val ) {
+    difficulties.push({difficulty: key, value: val});
+  });
+  $("#difficultyHUD").html(Mustache.render(RenderDifficulties(), {difficulties: difficulties}));
+
 }
 
 function displaySelectedMonsters() {
-  var container = $("#current_monsters table tbody");
+  var container = $("#currentMonsters");
   container.html('');
   for (var i = 0; i < selected_monsters.length; i++) {
     var monster = selected_monsters[i];
-    var tr = $('<tr />');
-    tr.append($('<td>' + monster.name + '</td>'));
-    tr.append($('<td>' + monster.challenge_rating + '</td>'));
-    tr.append($('<td>' + monster.size + '</td>'));
-    tr.append($('<td>' + monster.type + '</td>'));
-    tr.append($('<td>' + monsters_xp_by_cr[monster.challenge_rating] + '</td>'));
-    tr.append($('<td>' + "remove" + '</td>'));
-    container.append(tr);
+    selected_monsters[i].xp = monsters_xp_by_cr[monster.challenge_rating];
   }
+  container.append(Mustache.render(renderSelectedMonsters(), {monsters: selected_monsters}));
 
+}
+
+function renderSelectedMonsters() {
+  return `
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>CR</th>
+        <th>Size</th>
+        <th>Type</th>
+        <th>XP</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#monsters}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{challenge_rating}}</td>
+        <td>{{size}}</td>
+        <td>{{type}}</td>
+        <td>{{xp}}</td>
+      </tr>
+      {{/monsters}}
+    </tbody>
+  </table>
+  `;
+}
+
+function renderMonsters() {
+  return `
+    {{#crs}}
+    <div class="row">
+      {{#monsters}}
+      <div class="col-md-3">
+        <h4>CR: {{challenge_rating}}, Difficulty: {{difficulty}}</h4>
+        <ul class="list-group">
+          {{#monsters}}
+          <li class="list-group-item" id="id{{name}}">
+            {{name}}
+            <button type="button" id="add_monster" class="add_monster btn btn-primary badge" name="{{name}}">
+              add
+            </button>
+          </li>
+          {{/monsters}}
+        </ul>
+      </div>
+      {{/monsters}}
+    </div>
+    {{/crs}}
+  `;
+}
+
+function renderHUD() {
+  return `
+  {{#hud}}
+  <div class="col-md-3 col-sm-6">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <span class="fa-stack fa-5x">
+            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+            <i class="fa {{icon}} fa-stack-1x fa-inverse"></i>
+        </span>
+      </div>
+      <div class="panel-body">
+        <h4>{{name}}</h4>
+        <p></p><h3>{{value}}</h3><p></p>
+      </div>
+    </div>
+  </div>
+  {{/hud}}
+  `;
+}
+
+function RenderDifficulties() {
+  return `
+  {{#difficulties}}
+  <div class="col-sm-3">
+    <div class="panel panel-success">
+      <div class="panel-heading">{{difficulty}}</div>
+      <div class="panel-body">{{value}}</div>
+    </div>
+  </div>
+  {{/difficulties}}
+  `;
+}
+
+function renderSelectedPlayer() {
+  return `
+  <ul class="nav nav-pills" role="tablist" id="stuff">
+    {{#selectedPlayers}}
+    <li id="{{level}}" name="name1" class="presentation"><a>Level: {{level}}</a></li>
+    {{/selectedPlayers}}
+  </ul>
+  `;
 }
 
 getAllMonsters();
